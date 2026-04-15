@@ -6,6 +6,7 @@ const ProductProvider = ({ children }) => {
   const [search, setSearch] = useState("");
   const [category, setCategory] = useState("");
   const [sort, setSort] = useState("");
+  const [loading, setLoading] = useState(false);
 
   const API = import.meta.env.VITE_API_URL;
 
@@ -30,18 +31,21 @@ const ProductProvider = ({ children }) => {
 
   const fetchProducts = async () => {
     try {
+      setLoading(true);
       const res = await fetch(`${API}/products`);
       const data = await res.json();
 
       setProducts(data);
     } catch (error) {
       console.log(error);
+    }finally{
+      setLoading(false)
     }
   };
   return (
     <div>
       <ProductContext.Provider
-        value={{ products, setProducts, addProduct, fetchProducts,search,setSearch,category,setCategory,sort,setSort,API }}
+        value={{ products, setProducts, addProduct, fetchProducts,search,setSearch,category,setCategory,sort,setSort,API,loading }}
       >
         {children}
       </ProductContext.Provider>

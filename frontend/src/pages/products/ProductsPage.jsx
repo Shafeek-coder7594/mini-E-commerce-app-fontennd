@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 import { ProductContext } from "../../context/ProductContext";
 
 const ProductsPage = () => {
-  const { products, fetchProducts, search, category, sort,API } =
+  const { products, fetchProducts, search, category, sort,API,loading } =
     useContext(ProductContext);
 
     console.log("API URL:", API);
@@ -50,7 +50,12 @@ const ProductsPage = () => {
       </h1>
 
       <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 sm:gap-3 md:grid-cols-3 md:gap-6">
-        {filteredProducts.length === 0 ? (
+
+        {loading ? (
+          <p className="text-center col-span-full text-lg font-semibold">
+            Loading Products...
+          </p>
+        ) : filteredProducts.length === 0 ? (
           <p>No products found</p>
         ) : (
           currentProducts.map((product) => (
