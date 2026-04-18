@@ -39,7 +39,7 @@ const ProductsPage = () => {
   const totalPages = Math.ceil(displayedProducts.length / productsPerPage);
 
   return (
-    <div className="flex flex-col md:flex-row gap-6 ">
+    <div className="flex flex-col md:flex-row gap-6 pt-16">
       {/* left filter */}
       <div className="w-1/4 bg-white p-4 rounded-lg shadow">
         <h2 className="font-bold mb-3">Filters</h2>
