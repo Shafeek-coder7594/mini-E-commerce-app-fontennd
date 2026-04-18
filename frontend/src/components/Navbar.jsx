@@ -23,21 +23,21 @@ const Navbar = () => {
           <span className="hidden md:block">OMNISTRIDE</span>
         </div>
 
-        <div className="fixed top-0 left-0 w-full bg-gray-900 z-50">
-          <div className="max-w-7xl mx-auto px-6 py-3 flex items-center">
-            {/* search bar here */}
+        <form className="max-w-md mx-auto">
+            <label
+              htmlFor="search"
+              className="block mb-2.5 text-sm font-medium text-heading sr-only "
+            >
+              Search
+            </label>
             <div className="relative">
-              <input
-                type="search"
-                placeholder="Search"
-                className="w-full p-2 pl-8 rounded-lg bg-slate-700"
-                value={search}
-                onChange={(e) => setSearch(e.target.value)}
-              />
               <div className="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
                 <svg
-                  className="w-4 h-4 text-gray-400"
+                  className="w-4 h-4 text-body"
+                  aria-hidden="true"
                   xmlns="http://www.w3.org/2000/svg"
+                  width="24"
+                  height="24"
                   fill="none"
                   viewBox="0 0 24 24"
                 >
@@ -49,10 +49,16 @@ const Navbar = () => {
                   />
                 </svg>
               </div>
+              <input
+                type="search"
+                className="block w-full p-3 ps-9 bg-slate-700 border border-default-medium text-heading text-sm rounded-full focus:ring-brand focus:border-brand shadow-xs placeholder:text-body"
+                placeholder="Search"
+                required
+                value={search}
+                onChange={(e) => setSearch(e.target.value)}
+              />
             </div>
-          </div>
-        </div>
-
+          </form>
         {/* product add button */}
         {location.pathname === "/add-product" ? (
           <button
