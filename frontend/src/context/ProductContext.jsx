@@ -32,10 +32,11 @@ const ProductProvider = ({ children }) => {
   const fetchProducts = async () => {
     try {
       setLoading(true);
-      const res = await fetch(`${API}/products`);
+      const res = await fetch(`${API}/products?search=${search}&category=${category}&sort=${sort}`);
       const data = await res.json();
 
       setProducts(data);
+      
     } catch (error) {
       console.log(error);
     }finally{

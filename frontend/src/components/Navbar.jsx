@@ -9,7 +9,7 @@ const Navbar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
 
   //for search sort and category
-  const { search, setSearch, category, setCategory, sort, setSort } =
+  const { search, setSearch} =
     useContext(ProductContext);
 
   return (
@@ -34,28 +34,6 @@ const Navbar = () => {
         </button>
 
         {/* drop down and search bar */}
-        <div className="hidden md:flex items-center gap-4">
-          <select
-            value={category}
-            onChange={(e) => setCategory(e.target.value)}
-            className="bg-slate-700 p-2 lg:px-3 lg:py-4 rounded-lg"
-          >
-            <option value="">All Categories</option>
-            <option value="electronics">Electronics</option>
-            <option value="audio">Audio</option>
-            <option value="furniture">Furniture</option>
-            <option value="acessories">Accessories</option>
-          </select>
-
-          <select
-            value={sort}
-            className="bg-slate-700 p-2 w-20 lg:w-auto lg:px-3 lg:py-4 rounded-lg"
-            onChange={(e) => setSort(e.target.value)}
-          >
-            <option value="">Sort</option>
-            <option value="low">Price: low to high</option>
-            <option value="high">Price: high to low</option>
-          </select>
           <form className="max-w-md mx-auto">
             <label
               htmlFor="search"

@@ -2,112 +2,146 @@ import React, { useContext, useEffect, useState } from "react";
 import { ProductContext } from "../../context/ProductContext";
 
 const ProductsPage = () => {
-  const { products, fetchProducts, search, category, sort,API,loading } =
-    useContext(ProductContext);
+  const {
+    products,
+    fetchProducts,
+    search,
+    category,
+    setCategory,
+    sort,
+    setSort,
+    API,
+    loading,
+  } = useContext(ProductContext);
 
-    console.log("API URL:", API);
+  console.log("API URL:", API);
 
   const [currentPage, setCurrentPage] = useState(1);
   const productsPerPage = 6;
 
   useEffect(() => {
     fetchProducts();
-  }, []);
+  }, [search, category, sort]);
 
   useEffect(() => {
     setCurrentPage(1);
   }, [search, category, sort]);
 
   //for search
-  let filteredProducts = products.filter((product) =>
-    product.name.toLowerCase().includes(search.toLowerCase()),
-  );
-
-  if (category) {
-    filteredProducts = filteredProducts.filter(
-      (product) => product.category === category,
-    );
-  }
-
-  if (sort === "low") {
-    filteredProducts.sort((a, b) => a.price - b.price);
-  } else if (sort === "high") {
-    filteredProducts.sort((a, b) => b.price - a.price);
-  }
+  const displayedProducts = products;
 
   //pagination
   const indexOfLast = currentPage * productsPerPage;
   const indexOfFirst = indexOfLast - productsPerPage;
 
-  const currentProducts = filteredProducts.slice(indexOfFirst, indexOfLast);
+  const currentProducts = displayedProducts.slice(indexOfFirst, indexOfLast);
 
-  const totalPages = Math.ceil(filteredProducts.length / productsPerPage);
+  const totalPages = Math.ceil(displayedProducts.length / productsPerPage);
 
   return (
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 py-4">
-      <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-4">
-        Products
-      </h1>
+    <div className="flex flex-col md:flex-row gap-6 ">
+      {/* left filter */}
+      <div className="w-1/4 bg-white p-4 rounded-lg shadow">
+        <h2 className="font-bold mb-3">Filters</h2>
 
-      <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 sm:gap-3 md:grid-cols-3 md:gap-6">
+        {/* Category */}
+        <div className="mt-4">
+          <h3 className="font-semibold mb-2">Category</h3>
 
-        {loading ? (
-          <p className="text-center col-span-full text-lg font-semibold">
-            Loading Products...
-          </p>
-        ) : filteredProducts.length === 0 ? (
-          <p>No products found</p>
-        ) : (
-          currentProducts.map((product) => (
-            <div
-              key={product._id}
-              className="rounded-xl p-3 sm:p-4 hover:scale-103 hover:shadow-xl hover:-translate-y-1 transition"
+          {["Electronics", "Audio", "Furniture", "Accessories"].map((cat) => (
+            <label
+              key={cat}
+              className="flex items-center gap-2 mb-2 cursor-pointer"
             >
-              <img
-                src={`${API}/uploads/${product.image}`}
-                alt={product.name}
-                className="h-40 w-full object-cover rounded-lg"
+              <input
+                type="checkbox"
+                checked={category === cat}
+                onChange={() => setCategory(category === cat ? "" : cat)}
+                className="w-4 h-4"
               />
-              {console.log("imageURL: ",product.image)}
 
-              <h2 className="text-base sm:text-lg font-semibold mt-2">{product.name}</h2>
+              <span>{cat}</span>
+            </label>
+          ))}
+        </div>
 
-              <p className="text-sm sm:text-base text-gray-600">${product.price}</p>
-
-              <p className="text-xs sm:text-sm text-gray-500">{product.category}</p>
-            </div>
-          ))
-        )}
+        {/* Sort */}
+        <select value={sort} onChange={(e) => setSort(e.target.value)}>
+          <option value="">Sort</option>
+          <option value="low">Price Low → High</option>
+          <option value="high">Price High → Low</option>
+        </select>
       </div>
+      <div className="w-3/4 px-4 sm:px-6 py-4">
+        <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-4">
+          Products
+        </h1>
 
-      <div className="flex flex-wrap justify-center gap-2 mt-6">
-        <button
-          onClick={() => setCurrentPage((prev) => prev - 1)}
-          disabled={currentPage === 1}
-          className={`px-3 py-1 text-sm sm:text-base rounded-md ${currentPage === 1 ? "bg-gray-300 cursor-not-allowed" : "bg-gray-900 text-white"}`}
-        >
-          Prev
-        </button>
+        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 sm:gap-3 md:grid-cols-3 md:gap-6">
+          {loading ? (
+            <p className="text-center col-span-full text-lg font-semibold">
+              Loading Products...
+            </p>
+          ) : displayedProducts.length === 0 ? (
+            <p>No products found</p>
+          ) : (
+            currentProducts.map((product) => (
+              <div
+                key={product._id}
+                className="rounded-xl p-3 sm:p-4 hover:scale-103 hover:shadow-xl hover:-translate-y-1 transition"
+              >
+                <img
+                  src={`${API}/uploads/${product.image}`}
+                  alt={product.name}
+                  className="h-40 w-full object-cover rounded-lg"
+                />
+                {console.log("imageURL: ", product.image)}
 
-        {Array.from({ length: totalPages }, (_, i) => (
+                <h2 className="text-base sm:text-lg font-semibold mt-2">
+                  {product.name}
+                </h2>
+
+                <p className="text-sm sm:text-base text-gray-600">
+                  ${product.price}
+                </p>
+
+                <p className="text-xs sm:text-sm text-gray-500">
+                  {product.category}
+                </p>
+              </div>
+            ))
+          )}
+        </div>
+
+        <div className="flex flex-wrap justify-center gap-2 mt-6">
           <button
-            key={i}
-            onClick={() => setCurrentPage(i + 1)}
-            className={`px-3 py-1 rounded-full ${
-              currentPage == i + 1 ? "bg-gray-900 text-white" : "bg-gray-200"
-            }`}
+            onClick={() => setCurrentPage((prev) => prev - 1)}
+            disabled={currentPage === 1}
+            className={`px-3 py-1 text-sm sm:text-base rounded-md ${currentPage === 1 ? "bg-gray-300 cursor-not-allowed" : "bg-gray-900 text-white"}`}
           >
-            {i + 1}
+            Prev
           </button>
-        ))}
 
-        <button
-          onClick={() => setCurrentPage((prev) => prev + 1)}
-          disabled={currentPage === totalPages}
-          className={`px-3 py-1 rounded-md ${currentPage === totalPages ? "bg-gray-300 cursor-not-allowed" : "bg-gray-900 text-white"}`}
-        >
-          Next
-        </button>
+          {Array.from({ length: totalPages }, (_, i) => (
+            <button
+              key={i}
+              onClick={() => setCurrentPage(i + 1)}
+              className={`px-3 py-1 rounded-full ${
+                currentPage == i + 1 ? "bg-gray-900 text-white" : "bg-gray-200"
+              }`}
+            >
+              {i + 1}
+            </button>
+          ))}
+
+          <button
+            onClick={() => setCurrentPage((prev) => prev + 1)}
+            disabled={currentPage === totalPages}
+            className={`px-3 py-1 rounded-md ${currentPage === totalPages ? "bg-gray-300 cursor-not-allowed" : "bg-gray-900 text-white"}`}
+          >
+            Next
+          </button>
+        </div>
       </div>
     </div>
   );
