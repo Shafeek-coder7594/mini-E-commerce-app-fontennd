@@ -73,8 +73,7 @@ const Navbar = () => {
               focus:ring-1 focus:ring-success-medium shadow-xs font-medium leading-5 rounded-md text-sm px-4 py-2.5 focus:outline-none"
             onClick={() => navigate("/add-product")}
           >
-            {" "}
-            + Add product{" "}
+            + Add product
           </button>
         )}
       </div>
@@ -118,17 +117,28 @@ const Navbar = () => {
     </div>
 
     {/* Button (Add / Home) */}
-    <button
-      onClick={() =>
-        location.pathname === "/add-product"
-          ? navigate("/")
-          : navigate("/add-product")
-      }
-      className="text-white text-2xl font-bold px-2"
-    >
-      {location.pathname === "/add-product" ? "🏠" : "+"}
-    </button>
-
+    {location.pathname === "/add-product" ? (
+          <button
+            className="text-white bg-blue-500 hover:bg-blue-600 px-4 py-2.5 rounded-md
+              transition-all duration-300 transform 
+              hover:scale-105
+              focus:ring-1 focus:ring-success-medium font-medium text-lg"
+            onClick={() => navigate("/")}
+          >
+            ← 
+          </button>
+        ) : (
+          <button
+            type="button"
+            className="text-white bg-green-500 box-border border border-transparent hover:bg-success-strong hover:bg-green-600 
+              transition-all duration-300 transform 
+              hover:scale-105
+              focus:ring-1 focus:ring-success-medium shadow-xs font-bold leading-5 rounded-md text-lg px-4 py-2.5 focus:outline-none"
+            onClick={() => navigate("/add-product")}
+          >
+            +
+          </button>
+        )}
   </div>
 </div>
     </div>
