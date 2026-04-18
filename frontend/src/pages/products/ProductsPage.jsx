@@ -40,9 +40,9 @@ const ProductsPage = () => {
 
   return (
     <div className="flex flex-col md:flex-row gap-6 pt-16">
-      <aside class="w-full lg:w-72 bg-white rounded-2xl shadow-xl p-6 m-4 lg:sticky lg:top-24 lg:h-fit border border-gray-100">
+      <aside className="w-full lg:w-72 bg-white rounded-2xl shadow-xl p-6 m-4 lg:sticky lg:top-24 lg:h-fit border border-gray-100">
         {/* left filter */}
-        <div className="w-1/4 bg-white p-4 rounded-lg shadow">
+        <div className="w-full bg-white p-4 rounded-lg shadow">
           <h2 className="font-bold text-xl text-gray-800 mb-3">Filters</h2>
 
           {/* Category */}
