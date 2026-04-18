@@ -23,7 +23,7 @@ const Navbar = () => {
           <span>OMNISTRIDE</span>
         </div>
 
-        <div className="fixed top-0 left-0 w-full bg-gray-900 z-50">
+        <div className="fixed top-0 left-0 w-full bg-gray-900 z-50 md:hidden">
           <div className="max-w-7xl mx-auto px-6 py-3 flex items-center">
             {/* search bar here */}
             <div className="relative">
@@ -90,35 +90,31 @@ const Navbar = () => {
       O
     </div>
 
-    <div className="fixed top-0 left-0 w-full bg-gray-900 z-50 md:hidden">
-          <div className="max-w-7xl mx-auto px-6 py-3 flex items-center">
-            {/* search bar here */}
-            <div className="relative">
-              <input
-                type="search"
-                placeholder="Search"
-                className="w-full p-2 pl-8 rounded-lg bg-slate-700"
-                value={search}
-                onChange={(e) => setSearch(e.target.value)}
-              />
-              <div className="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
-                <svg
-                  className="w-4 h-4 text-gray-400"
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    stroke="currentColor"
-                    strokeLinecap="round"
-                    strokeWidth="2"
-                    d="m21 21-3.5-3.5M17 10a7 7 0 1 1-14 0 7 7 0 0 1 14 0Z"
-                  />
-                </svg>
-              </div>
-            </div>
-          </div>
-        </div> 
+    {/* Search */}
+    <div className="flex-1 relative">
+      <input
+        type="search"
+        placeholder="Search"
+        className="w-full p-2 pl-8 rounded-full bg-slate-700 text-sm text-white"
+        value={search}
+        onChange={(e) => setSearch(e.target.value)}
+      />
+      <div className="absolute inset-y-0 left-2 flex items-center pointer-events-none">
+        <svg
+          className="w-4 h-4 text-gray-400"
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 24 24"
+        >
+          <path
+            stroke="currentColor"
+            strokeLinecap="round"
+            strokeWidth="2"
+            d="m21 21-3.5-3.5M17 10a7 7 0 1 1-14 0 7 7 0 0 1 14 0Z"
+          />
+        </svg>
+      </div>
+    </div>
 
     {/* Button (Add / Home) */}
     {location.pathname === "/add-product" ? (
