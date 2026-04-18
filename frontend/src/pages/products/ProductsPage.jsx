@@ -69,7 +69,7 @@ const ProductsPage = () => {
           </div>
 
           {/* Sort */}
-          <div className="width-full">
+          <div className="w-full">
             <h3 className="text-sm font-semibold text-gray-800 mb-2">Sort by:</h3>
 
             <select
