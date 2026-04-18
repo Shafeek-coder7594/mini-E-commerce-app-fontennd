@@ -70,7 +70,7 @@ const ProductsPage = () => {
 
           {/* Sort */}
           <div>
-            <h3 className="text-sm font-semibold text-gray-800 mb-4"></h3>
+            <h3 className="text-sm font-semibold text-gray-800 mb-2">Sort by:</h3>
 
             <select
               value={sort}
