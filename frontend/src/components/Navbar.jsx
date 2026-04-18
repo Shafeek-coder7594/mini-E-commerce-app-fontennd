@@ -119,10 +119,10 @@ const Navbar = () => {
     {/* Button (Add / Home) */}
     {location.pathname === "/add-product" ? (
           <button
-            className="text-white bg-blue-500 hover:bg-blue-600 px-4 py-2.5 rounded-md
+            className="text-white bg-blue-500 box-border border border-transparent hover:bg-success-strong hover:bg-blue-600 
               transition-all duration-300 transform 
               hover:scale-105
-              focus:ring-1 focus:ring-success-medium font-medium text-lg"
+              focus:ring-1 focus:ring-success-medium shadow-xs font-bold leading-5 rounded-md text-lg px-4 py-2.5 focus:outline-none"
             onClick={() => navigate("/")}
           >
             ← 
