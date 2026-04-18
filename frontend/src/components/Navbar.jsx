@@ -10,7 +10,7 @@ const Navbar = () => {
   const { search, setSearch } = useContext(ProductContext);
 
   return (
-    <div className="bg-gray-900 text-white fixed top-0 left-0">
+    <div className="bg-gray-900 text-white fixed">
       <div className="max-w-7xl mx-auto px-6 py-3 flex justify-between items-center">
         {/* logo */}
         <div
@@ -77,8 +77,6 @@ const Navbar = () => {
           </button>
         )}
       </div>
-
-      {/* mobile version */}
     </div>
   );
 };
