@@ -23,7 +23,7 @@ const Navbar = () => {
           <span>OMNISTRIDE</span>
         </div>
 
-        <div className="fixed top-0 left-0 w-full bg-gray-900 z-50 md:hidden">
+        <div className="fixed top-0 left-0 w-full bg-gray-900 z-50">
           <div className="max-w-7xl mx-auto px-6 py-3 flex items-center">
             {/* search bar here */}
             <div className="relative">
