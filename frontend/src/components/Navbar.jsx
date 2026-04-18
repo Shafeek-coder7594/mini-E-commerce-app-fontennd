@@ -48,7 +48,9 @@ const Navbar = () => {
               focus:ring-1 focus:ring-success-medium "
             onClick={() => navigate("/")}
           >
-            ← <span className="hidden md:block">Back Home</span>
+            <div className="flex items-center gap-2">
+              ← <span className="hidden md:inline">Back Home</span>
+            </div>
           </button>
         ) : (
           <button
@@ -59,7 +61,9 @@ const Navbar = () => {
               focus:ring-1 focus:ring-success-medium shadow-xs font-medium leading-5 rounded-md text-sm px-4 py-2.5 focus:outline-none"
             onClick={() => navigate("/add-product")}
           >
-            + <span className="hidden md:block">Add product</span>
+            <div className="flex items-center gap-2">
+              + <span className="hidden md:block">Add product</span>
+            </div>
           </button>
         )}
       </div>
