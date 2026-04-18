@@ -40,38 +40,50 @@ const ProductsPage = () => {
 
   return (
     <div className="flex flex-col md:flex-row gap-6 pt-16">
-      {/* left filter */}
-      <div className="w-1/4 bg-white p-4 rounded-lg shadow">
-        <h2 className="font-bold mb-3">Filters</h2>
+      <aside class="w-full lg:w-72 bg-white rounded-2xl shadow-xl p-6 m-4 lg:sticky lg:top-24 lg:h-fit border border-gray-100">
+        {/* left filter */}
+        <div className="w-1/4 bg-white p-4 rounded-lg shadow">
+          <h2 className="font-bold text-xl text-gray-800 mb-3">Filters</h2>
 
-        {/* Category */}
-        <div className="mt-4">
-          <h3 className="font-semibold mb-2">Category</h3>
+          {/* Category */}
+          <div className="mt-4">
+            <h3 className="font-semibold text-gray-800 mb-4">Category</h3>
 
-          {["Electronics", "Audio", "Furniture", "Accessories"].map((cat) => (
-            <label
-              key={cat}
-              className="flex items-center gap-2 mb-2 cursor-pointer"
+            {["Electronics", "Audio", "Furniture", "Accessories"].map((cat) => (
+              <label
+                key={cat}
+                className="flex items-center gap-2 p-3 rounded-lg gradient-to-r hover:from-indigo-50 cursor-pointer transition-all duration-300 group"
+              >
+                <input
+                  type="checkbox"
+                  checked={category === cat}
+                  onChange={() => setCategory(category === cat ? "" : cat)}
+                  className="w-4 h-4"
+                />
+
+                <span className="text-sm text-gray-600 group-hover:text-gray-900 transition-colors duration-300 font-medium">
+                  {cat}
+                </span>
+              </label>
+            ))}
+          </div>
+
+          {/* Sort */}
+          <div>
+            <h3 className="text-sm font-semibold text-gray-800 mb-4"></h3>
+
+            <select
+              value={sort}
+              onChange={(e) => setSort(e.target.value)}
+              className="w-full appearance-none bg-linear-to-br from-gray-50 to-gray-100 border-2 border-gray-200 rounded-lg px-4 py-3 pr-10 text-sm font-medium text-gray-700 cursor-pointer hover:border-gray-600 focus:outline-none focus:ring-4 focus:ring-gray-100 focus:border-gray-500 transition-all duration-300"
             >
-              <input
-                type="checkbox"
-                checked={category === cat}
-                onChange={() => setCategory(category === cat ? "" : cat)}
-                className="w-4 h-4"
-              />
-
-              <span>{cat}</span>
-            </label>
-          ))}
+              <option value="">Sort</option>
+              <option value="low">Price Low → High</option>
+              <option value="high">Price High → Low</option>
+            </select>
+          </div>
         </div>
-
-        {/* Sort */}
-        <select value={sort} onChange={(e) => setSort(e.target.value)}>
-          <option value="">Sort</option>
-          <option value="low">Price Low → High</option>
-          <option value="high">Price High → Low</option>
-        </select>
-      </div>
+      </aside>
       <div className="w-3/4 px-4 sm:px-6 py-4">
         <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-4">
           Products
